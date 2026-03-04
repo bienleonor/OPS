@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Op System" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="bg-gray-100">
+    <nav class="fixed top-0 left-0 w-full bg-white px-6 py-4 flex justify-between items-center shadow z-30">
+      <div class="font-bold text-lg">
+        Wallet
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <% if current_user %>
+          <span>Hi, <%= current_user.email %></span>
+          <%= button_to "Logout", logout_path, method: :delete,
+              class: "bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" %>
+        <% else %>
+          <%= link_to "Login", root_path,
+              class: "bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded" %>
+        <% end %>
+      </div>
+    </nav>
+    <% if current_user %>
+      <aside class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white flex flex-col p-6 pt-20 z-20">
+        <%= link_to "Home", root_path, class: "hover:bg-gray-700 px-3 py-2 rounded mb-2" %>
+      </aside>
+    <% end %>
+
+    <main class="<%= current_user ? 'ml-64 mt-20' : 'mt-20' %> p-6">
+      <%= yield %>
+    </main>
+
+  </body>
+</html>
