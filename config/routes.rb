@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   post   "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
+  get    "/signup",   to: "sessions#signup",  as: :signup
+  post   "/signup",   to: "sessions#register"
+
+
+
   resources :transfers, only: [:create]
   resources :transfers, only: [:index] do
     collection do
