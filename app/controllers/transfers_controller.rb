@@ -17,7 +17,7 @@ class TransfersController < ApplicationController
     begin
       TransferService.call(sender: current_user, receiver: receiver, amount: amount)
       flash[:notice] = "Transfer successful!"
-      redirect_to root_path
+      redirect_to send_money_transfers_path
     rescue => e
       flash[:alert] = e.message
       redirect_to send_money_transfers_path
