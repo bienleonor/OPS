@@ -9,10 +9,8 @@ Rails.application.routes.draw do
   get    "/signup",   to: "sessions#signup",  as: :signup
   post   "/signup",   to: "sessions#register"
 
-
-
-  resources :transfers, only: [:create]
-  resources :transfers, only: [:index] do
+  resources :transfers, only: [ :create ]
+  resources :transfers, only: [ :index ] do
     collection do
       get  :send_money
       post :send_money
@@ -31,5 +29,4 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-
 end

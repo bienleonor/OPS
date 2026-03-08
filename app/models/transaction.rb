@@ -11,7 +11,14 @@ class Transaction < ApplicationRecord
     withdraw: "withdraw"
   }, suffix: true
 
-  # Helpers for view
+  scope :for_user, ->(user) {
+    where(sender: user).or(where(receiver: user))
+  }
+
+  scope :recent, -> {
+    order(created_at: :desc)
+  }
+
   def direction_for(user)
     sender == user ? :deduction : :addition
   end
